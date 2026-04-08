@@ -38,7 +38,6 @@ export interface SpecItem {
 export interface ContactItem {
   label: string;
   value: string;
-  href: string;
 }
 
 export interface ProjectContent {
@@ -47,7 +46,6 @@ export interface ProjectContent {
     title: string;
     paragraphs: string[];
   };
-  modifications: TextBlock[];
   applications: TextBlock[];
   specs: SpecItem[];
   contacts: ContactItem[];

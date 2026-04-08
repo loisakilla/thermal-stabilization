@@ -1,5 +1,7 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 const bodyFont = Montserrat({
@@ -15,7 +17,7 @@ export const metadata: Metadata = {
     template: "%s | Прецизионная система термостабилизации",
   },
   description:
-    "Проект по созданию прецизионной системы термостабилизации на основе элементов Пельтье: две модификации, ключевые характеристики, состав и обязательный контент поддержки.",
+    "Проект по созданию прецизионной системы термостабилизации на основе элементов Пельтье: ключевые характеристики, состав системы и обязательный контент поддержки.",
   openGraph: {
     title: "Создание прецизионной системы термостабилизации на основе элементов Пельтье",
     description:
@@ -38,7 +40,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru" className={bodyFont.variable}>
-      <body className="min-h-dvh font-sans antialiased">{children}</body>
+      <body className="min-h-dvh font-sans antialiased">
+        {children}
+        <Analytics />
+        <SpeedInsights />
+      </body>
     </html>
   );
 }

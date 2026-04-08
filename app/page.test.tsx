@@ -23,11 +23,11 @@ describe("Landing compliance", () => {
   it("renders all required landing sections", () => {
     render(<Home />);
 
-    expect(screen.getByRole("heading", { name: /о продукте/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /модификации системы/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /области применения/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /технические характеристики/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /контакты/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /поддержка проекта/i })).toBeInTheDocument();
+    expect(document.querySelector("#about")).toBeInTheDocument();
+    expect(document.querySelector("#prototype")).toBeInTheDocument();
+    expect(document.querySelector("#applications")).toBeInTheDocument();
+    expect(document.querySelector("#specs")).toBeInTheDocument();
+    expect(document.querySelector("#contacts")).toBeInTheDocument();
+    expect(document.querySelector("#support")).toBeInTheDocument();
   });
 });

@@ -1,37 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowRightIcon,
-  Building2Icon,
-  FileTextIcon,
-  MapPinIcon,
-  ShieldCheckIcon,
-} from "lucide-react";
+import { ArrowRightIcon, Building2Icon, ShieldCheckIcon } from "lucide-react";
 
 import { LandingAnimations } from "@/components/landing/landing-animations";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { complianceBlock, projectContent } from "@/content/project-content";
-
-const navItems = [
-  { label: "О продукте", href: "#about" },
-  { label: "Прототип", href: "#prototype" },
-  { label: "Модификации", href: "#modifications" },
-  { label: "Применение", href: "#applications" },
-  { label: "Характеристики", href: "#specs" },
-  { label: "Контакты", href: "#contacts" },
-  { label: "Поддержка", href: "#support" },
-];
-
-const aboutTitles = ["Тема проекта", "Описание продукта", "Назначение"];
-
-const contactIcons = {
-  Организация: Building2Icon,
-  Реквизиты: FileTextIcon,
-  Адрес: MapPinIcon,
-} as const;
+import { complianceBlock, projectContent, uiText } from "@/content/project-content";
 
 export default function Home() {
   return (
@@ -41,11 +17,11 @@ export default function Home() {
       <header className="sticky top-0 z-40 border-b bg-background/85 backdrop-blur-sm">
         <div className="layout-grid mx-auto flex w-full max-w-6xl flex-col gap-3 px-4 py-3 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
           <div className="flex items-center gap-3">
-            <span className="font-heading text-lg font-semibold">Термостабилизация</span>
+            <span className="font-heading text-lg font-semibold">{uiText.brand}</span>
           </div>
-          <nav aria-label="Навигация по странице" className="w-full overflow-x-auto lg:w-auto">
+          <nav aria-label={uiText.navAriaLabel} className="w-full overflow-x-auto lg:w-auto">
             <ul className="flex min-w-max items-center gap-4 text-sm text-muted-foreground">
-              {navItems.map((item) => (
+              {uiText.navItems.map((item) => (
                 <li key={item.href}>
                   <a className="hover:text-foreground" href={item.href}>
                     {item.label}
@@ -59,24 +35,14 @@ export default function Home() {
 
       <main className="mx-auto flex w-full max-w-6xl flex-col gap-14 px-4 pb-16 pt-10 sm:gap-18 sm:px-6 sm:pt-14 lg:px-8">
         <section id="hero" className="flex flex-col gap-5">
-          <h1
-            data-hero-animate
-            className="max-w-4xl text-4xl leading-tight sm:text-5xl lg:text-6xl"
-          >
+          <h1 data-hero-animate className="max-w-4xl text-4xl leading-tight sm:text-5xl lg:text-6xl">
             {projectContent.hero.title}
           </h1>
-          <p
-            data-hero-animate
-            className="max-w-3xl text-base text-muted-foreground sm:text-lg"
-          >
+          <p data-hero-animate className="max-w-3xl text-base text-muted-foreground sm:text-lg">
             {projectContent.hero.lead}
           </p>
           <div data-hero-animate className="flex flex-wrap gap-3">
-            <Button
-              size="lg"
-              nativeButton={false}
-              render={<a href={projectContent.hero.primaryCtaHref} />}
-            >
+            <Button size="lg" nativeButton={false} render={<a href={projectContent.hero.primaryCtaHref} />}>
               {projectContent.hero.primaryCtaLabel}
               <ArrowRightIcon data-icon="inline-end" />
             </Button>
@@ -99,7 +65,7 @@ export default function Home() {
             {projectContent.about.paragraphs.map((paragraph, index) => (
               <Card key={`${index}-${paragraph}`} data-animate-item>
                 <CardHeader>
-                  <CardTitle>{aboutTitles[index] ?? "Описание"}</CardTitle>
+                  <CardTitle>{uiText.aboutTitles[index] ?? uiText.aboutFallbackTitle}</CardTitle>
                   <CardDescription className="text-base leading-7">{paragraph}</CardDescription>
                 </CardHeader>
               </Card>
@@ -108,7 +74,7 @@ export default function Home() {
         </section>
 
         <section id="prototype" data-animate-section className="flex flex-col gap-5">
-          <h2 className="text-3xl">Фото прототипа</h2>
+          <h2 className="text-3xl">{uiText.prototypeHeading}</h2>
           <Card className="overflow-hidden">
             <div data-animate-stagger className="space-y-0">
               <div
@@ -117,7 +83,7 @@ export default function Home() {
               >
                 <Image
                   src="/media/product-prototype.png"
-                  alt="Прототип прецизионной системы термостабилизации с блоком управления и узлом охлаждения"
+                  alt={uiText.prototypeAlt}
                   fill
                   priority
                   sizes="(max-width: 1024px) 85vw, 1020px"
@@ -126,41 +92,20 @@ export default function Home() {
                 />
               </div>
               <CardContent data-animate-item className="mx-auto w-[85%] pt-5">
-                <p className="text-base leading-7 text-muted-foreground">
-                  Лабораторный образец включает универсальный блок управления, источник питания и
-                  модуль охлаждения на элементах Пельтье.
-                </p>
+                <p className="text-base leading-7 text-muted-foreground">{uiText.prototypeCaption}</p>
               </CardContent>
             </div>
           </Card>
         </section>
 
-        <section id="modifications" data-animate-section className="flex flex-col gap-5">
-          <h2 className="text-3xl">Модификации системы</h2>
-          <div data-animate-stagger className="grid gap-4 md:grid-cols-2">
-            {projectContent.modifications.map((item) => (
-              <Card key={item.title} data-animate-item>
-                <CardHeader>
-                  <CardTitle>{item.title}</CardTitle>
-                  <CardDescription className="text-base leading-7">
-                    {item.description}
-                  </CardDescription>
-                </CardHeader>
-              </Card>
-            ))}
-          </div>
-        </section>
-
         <section id="applications" data-animate-section className="flex flex-col gap-5">
-          <h2 className="text-3xl">Области применения</h2>
+          <h2 className="text-3xl">{uiText.applicationsHeading}</h2>
           <div data-animate-stagger className="grid gap-4 md:grid-cols-3">
             {projectContent.applications.map((item) => (
               <Card key={item.title} data-animate-item>
                 <CardHeader>
                   <CardTitle>{item.title}</CardTitle>
-                  <CardDescription className="text-base leading-7">
-                    {item.description}
-                  </CardDescription>
+                  <CardDescription className="text-base leading-7">{item.description}</CardDescription>
                 </CardHeader>
               </Card>
             ))}
@@ -168,7 +113,7 @@ export default function Home() {
         </section>
 
         <section id="specs" data-animate-section className="flex flex-col gap-5">
-          <h2 className="text-3xl">Технические характеристики</h2>
+          <h2 className="text-3xl">{uiText.specsHeading}</h2>
           <div data-animate-stagger className="grid gap-4 md:grid-cols-2">
             {projectContent.specs.map((spec, index) => (
               <article
@@ -189,32 +134,26 @@ export default function Home() {
                   </span>
                 </div>
                 <p className="mt-3 text-lg leading-snug font-semibold">{spec.value}</p>
-                {spec.note ? (
-                  <p className="mt-3 text-sm leading-6 text-muted-foreground">{spec.note}</p>
-                ) : null}
+                {spec.note ? <p className="mt-3 text-sm leading-6 text-muted-foreground">{spec.note}</p> : null}
               </article>
             ))}
           </div>
         </section>
 
         <section id="contacts" data-animate-section className="flex flex-col gap-5">
-          <h2 className="text-3xl">Контакты</h2>
+          <h2 className="text-3xl">{uiText.contactsHeading}</h2>
           <Card data-animate-item>
             <CardHeader>
-              <CardTitle>Реквизиты и данные организации</CardTitle>
-              <CardDescription>
-                Данные юридического лица и адрес указаны по материалам отчета о выполнении работ.
-              </CardDescription>
+              <CardTitle>{uiText.contactsTitle}</CardTitle>
+              <CardDescription>{uiText.contactsDescription}</CardDescription>
             </CardHeader>
-            <CardContent data-animate-stagger className="grid gap-3 md:grid-cols-3">
+            <CardContent data-animate-stagger className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
               {projectContent.contacts.map((contact) => {
-                const ContactIcon =
-                  contactIcons[contact.label as keyof typeof contactIcons] ?? Building2Icon;
+                const ContactIcon = Building2Icon;
 
                 return (
-                  <a
+                  <div
                     key={contact.label}
-                    href={contact.href}
                     className="rounded-xl border bg-background p-4 transition-colors hover:bg-muted"
                     data-animate-item
                   >
@@ -223,15 +162,19 @@ export default function Home() {
                       {contact.label}
                     </div>
                     <p className="mt-2 text-sm text-muted-foreground">{contact.value}</p>
-                  </a>
+                  </div>
                 );
               })}
             </CardContent>
           </Card>
-
         </section>
 
-        <section id="support" data-testid="support-block" data-animate-section className="flex flex-col gap-5">
+        <section
+          id="support"
+          data-testid="support-block"
+          data-animate-section
+          className="flex flex-col gap-5"
+        >
           <h2 className="text-3xl">{complianceBlock.title}</h2>
 
           <Alert data-animate-item>
@@ -263,15 +206,17 @@ export default function Home() {
       <footer className="border-t">
         <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-6 text-sm text-muted-foreground sm:px-6 lg:px-8">
           <div className="flex flex-col gap-1">
-            <span>© {new Date().getFullYear()} Проект термостабилизации</span>
-            <span>Автор: Катаев Георгий · Год создания: 2026</span>
+            <span>
+              {"\u00A9"} {new Date().getFullYear()} {uiText.footerProject}
+            </span>
+            <span>{uiText.footerAuthor}</span>
           </div>
           <div className="flex items-center gap-4">
             <Link href="/privacy" className="hover:text-foreground">
-              Политика конфиденциальности
+              {uiText.privacyLabel}
             </Link>
             <Link href="/consent" className="hover:text-foreground">
-              Согласие на обработку данных
+              {uiText.consentLabel}
             </Link>
           </div>
         </div>
