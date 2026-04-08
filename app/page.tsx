@@ -8,7 +8,6 @@ import {
   ShieldCheckIcon,
 } from "lucide-react";
 
-import { EmailCaptureForm } from "@/components/landing/email-capture-form";
 import { LandingAnimations } from "@/components/landing/landing-animations";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
@@ -230,17 +229,6 @@ export default function Home() {
             </CardContent>
           </Card>
 
-          <Card data-animate-item>
-            <CardHeader>
-              <CardTitle>Оставить email</CardTitle>
-              <CardDescription>
-                Напишем вам по вопросам демонстрации и внедрения системы.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <EmailCaptureForm />
-            </CardContent>
-          </Card>
         </section>
 
         <section id="support" data-testid="support-block" data-animate-section className="flex flex-col gap-5">
