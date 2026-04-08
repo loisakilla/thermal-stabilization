@@ -36,22 +36,6 @@ npm test
 npm run build
 ```
 
-## Обратная связь
-
-Форма отправляет email на `POST /api/contact`.
-
-Для разрешённых доменов можно задать:
-
-```bash
-CONTACT_FORM_ALLOWED_ORIGINS=https://your-domain.vercel.app,http://localhost:3000
-```
-
-При необходимости интеграции с внешней системой используйте:
-
-```bash
-CONTACT_LEAD_WEBHOOK_URL=https://example.com/webhook
-```
-
 ## Автор
 
 Катаев Георгий  
