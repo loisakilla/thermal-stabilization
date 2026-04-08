@@ -1,6 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRightIcon, Building2Icon, ShieldCheckIcon } from "lucide-react";
+import {
+  ArrowRightIcon,
+  Building2Icon,
+  FileTextIcon,
+  MailIcon,
+  PhoneIcon,
+  ShieldCheckIcon,
+} from "lucide-react";
 
 import { LandingAnimations } from "@/components/landing/landing-animations";
 import { Alert, AlertTitle } from "@/components/ui/alert";
@@ -8,6 +15,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { complianceBlock, projectContent, uiText } from "@/content/project-content";
+
+function getContactIcon(label: string) {
+  if (label === "Телефон") return PhoneIcon;
+  if (label === "Email") return MailIcon;
+  if (label === "Реквизиты") return FileTextIcon;
+  return Building2Icon;
+}
 
 export default function Home() {
   return (
@@ -149,7 +163,7 @@ export default function Home() {
             </CardHeader>
             <CardContent data-animate-stagger className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
               {projectContent.contacts.map((contact) => {
-                const ContactIcon = Building2Icon;
+                const ContactIcon = getContactIcon(contact.label);
 
                 return (
                   <div
